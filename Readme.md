@@ -122,9 +122,31 @@ This will compile the project into a single binary using Bun’s compiler.
 
 ---
 
-## License
+## Special Thanks
 
-This project is licensed under the  
-**DON'T BE A DICK PUBLIC LICENSE**.
+- **DuckSoup**
+    - for being a high-quality, well-structured Silkroad packet filter
+    - for inspiration regarding maintainability, packet handling concepts and overall architecture
+    - project repository: https://github.com/ducksoup-sro/ducksoup
 
-See the `LICENSE.txt` file for full license details.
+- qqdev
+    - for the kind words, the motivation and helping me with questions
+
+- [Devsome](https://github.com/Devsome/)
+    - for the kind words, the motivation and ideas
+    - Silkroad Laravel project: https://github.com/Devsome/silkroad-laravel
+
+- [florian0](https://gitlab.com/florian0/)
+    - for the kind words, the motivation and ideas
+    - SRO_DevKit project: https://gitlab.com/florian0/sro_devkit
+
+- [pushedx](https://www.elitepvpers.com/forum/members/900141-pushedx.html)
+    - for the original SilkroadSecurityAPI
+    - original release: https://www.elitepvpers.com/forum/sro-coding-corner/1063078-c-silkroadsecurity.html
+
+- [DaxterSoul](https://www.elitepvpers.com/forum/members/1084164-daxtersoul.html)
+    - for the SilkroadDocs
+    - documentation repository: https://github.com/DummkopfOfHachtenduden/SilkroadDoc/
+
+- Chernobyl
+    - for the idea and the PacketHandler concept
