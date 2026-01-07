@@ -2,7 +2,7 @@
 
 ## What is FTemir?
 
-FTemir is a high-performance packet filter for Silkroad Online, designed with a strong focus on
+FTemir is a high-performance packet filter for Silkroad Online (v188), designed with a strong focus on
 **type safety, maintainability, and long-term stability**.
 
 The project is built from scratch with a modern architecture, aiming to provide a clean,
