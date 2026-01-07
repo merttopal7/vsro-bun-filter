@@ -32,7 +32,7 @@ export class DataHandler {
         return data;
     };
 
-    async ON_SERVER_GATEWAY_LOGIN_IBUV_CHALLENGE(data: ON_SERVER_GATEWAY_LOGIN_IBUV_CHALLENGE, session: Session) {
+    async ON_SERVER_GATEWAY_LOGIN_IBUV_CHALLENGE(data: SERVER_GATEWAY_LOGIN_IBUV_CHALLENGE, session: Session) {
         console.log("ON_SERVER_GATEWAY_LOGIN_IBUV_CHALLENGE", data.opcode);
 
         const pkg: Packet =
