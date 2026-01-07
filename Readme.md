@@ -2,14 +2,14 @@
 
 ## What is FTemir?
 
-FTemir is a high-performance packet filter for Silkroad Online (v188), designed with a strong focus on
+FTemir is a high-performance packet filter for Silkroad Online (v188), designed with a strong focus on  
 **type safety, maintainability, and long-term stability**.
 
-The project is built from scratch with a modern architecture, aiming to provide a clean,
-extensible, and developer-friendly filtering system without unnecessary abstractions or magic.
+The project is built from scratch with a modern architecture, aiming to provide a clean,  
+extensible, and developer-friendly filtering system without unnecessary abstractions or magic.  
 FTemir prioritizes **clarity and correctness over feature bloat**.
 
-Unlike traditional filters, FTemir uses a **schema-based packet design** with explicit read/write
+Unlike traditional filters, FTemir uses a **schema-based packet design** with explicit read/write  
 definitions, making packet logic easy to reason about and hard to misuse.
 
 ---
@@ -49,10 +49,16 @@ shardId = short();
 shardName = stringASCII();
 
 this.TryRead(shardName);
-this.TryRead(byte()); // for unnecessary fields
+this.TryRead(byte()); // skip unused field
 
 shardName.set("Test");
 this.TryWrite(shardName);
+```
+
+This approach ensures:
+- No ambiguity in packet structure
+- No accidental read/write mismatches
+- Full control over protocol behavior
 
 ---
 
@@ -62,7 +68,7 @@ this.TryWrite(shardName);
 - Windows or Linux (x64)
 - Silkroad Online v188 protocol knowledge (recommended)
 
-You can install Bun from:  
+Install Bun from:  
 https://bun.sh
 
 ---
@@ -78,18 +84,47 @@ https://bun.sh
 │  └─ utils/
 ├─ package.json
 └─ README.md
+```
 
 ---
 
 ## Running FTemir (Development)
 
-To run FTemir in development mode:
+Install dependencies:
+
 ```txt
 bun install
+```
+
+Run directly from source:
+
+```txt
 bun run src/index.ts
 ```
-or using the script:
+
+Or using npm scripts:
+
 ```txt
 bun run start
 ```
-This will start the packet filter directly from source.
+
+---
+
+## Building (Production)
+
+To build a standalone executable:
+
+```txt
+bun run build
+```
+
+This will compile the project into a single binary using Bun’s compiler.
+
+---
+
+## License
+
+This project is licensed under the  
+**DON'T BE A DICK PUBLIC LICENSE**.
+
+See the `LICENSE.txt` file for full license details.
