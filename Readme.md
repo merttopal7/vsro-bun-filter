@@ -1,4 +1,4 @@
-![alt text](ftemir-logo.png)
+![alt text](ftemir.png)
 
 # FTemir
 
