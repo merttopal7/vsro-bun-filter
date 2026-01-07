@@ -29,7 +29,7 @@ class Proxy {
 
   constructor(config: ProxyConfig) {
     this.services = {};
-    this.config = { debug: true, ...config };
+    this.config = { ...config };
     this.instances = new Map();
     this.middlewares = { client: {}, remote: {} };
     this.stream = stream;

@@ -4,6 +4,7 @@ import { DataHandler } from "@/modules/GatewayServer/handlers/dataHandler";
 
 class GatewayServer extends Proxy {
     constructor() {
+        configuration.debug = true;
         configuration.module = "GatewayServer";
         super(configuration);
 
