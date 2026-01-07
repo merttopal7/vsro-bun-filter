@@ -1,3 +1,5 @@
+![alt text](ftemir-logo.png)
+
 # FTemir
 
 ## What is FTemir?
