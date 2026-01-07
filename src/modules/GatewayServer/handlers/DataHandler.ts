@@ -8,7 +8,6 @@ export class DataHandler {
     constructor(server?: ModuleRegistry) {
         if (server)
             this.register(server);
-
     }
 
     register(server: ModuleRegistry) {
