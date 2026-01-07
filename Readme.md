@@ -73,21 +73,6 @@ https://bun.sh
 
 ---
 
-## Project Structure
-
-```txt
-.
-├─ src/
-│  ├─ index.ts        # Entry point
-│  ├─ core/           # Packet, stream, schema system
-│  ├─ modules/        # Gateway / Agent / Download logic
-│  └─ utils/
-├─ package.json
-└─ README.md
-```
-
----
-
 ## Running FTemir (Development)
 
 Install dependencies:
