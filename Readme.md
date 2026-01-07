@@ -1,3 +1,5 @@
+![alt text](ftemir-logo.png)
+
 # FTemir
 
 ## What is FTemir?
@@ -106,18 +108,10 @@ This will compile the project into a single binary using Bun’s compiler.
 
 ## Special Thanks
 
-- **DuckSoup**
+- [DuckSoup](https://github.com/ducksoup-sro/ducksoup)
     - for being a high-quality, well-structured Silkroad packet filter
     - for inspiration regarding maintainability, packet handling concepts and overall architecture
     - project repository: https://github.com/ducksoup-sro/ducksoup
-
-- [Devsome](https://github.com/Devsome/)
-    - for the kind words, the motivation and ideas
-    - Silkroad Laravel project: https://github.com/Devsome/silkroad-laravel
-
-- [florian0](https://gitlab.com/florian0/)
-    - for the kind words, the motivation and ideas
-    - SRO_DevKit project: https://gitlab.com/florian0/sro_devkit
 
 - [pushedx](https://www.elitepvpers.com/forum/members/900141-pushedx.html)
     - for the original SilkroadSecurityAPI
