@@ -3,6 +3,7 @@ import { ModuleRegistry } from '@/core/types';
 import { PacketResultType } from '@/utils/Types'
 import { CLIENT_GAME_READY } from '../actions/CLIENT_GAME_READY';
 import { Data } from '@/core/Session';
+import { EventFactory, EventFactoryNames } from '@/utils/EventFactory';
 const { string, byte, int, short, stringASCII } = StaticTypes;
 
 
@@ -21,7 +22,7 @@ export class DataHandler {
         session.SetData(Data.CharacterGameReady, true);
         session.SetData(Data.CharacterGameReadyTimestamp, Date.now());
         if (charScreen) {
-            // EventFactory.Publish(EventFactoryNames.OnUserLeaveCharScreen, session);
+            EventFactory.Publish(EventFactoryNames.OnUserLeaveCharScreen, session);
             session.SetData(Data.CharScreen, false);
         }
 
