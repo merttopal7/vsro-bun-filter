@@ -25,6 +25,7 @@ class Proxy {
     config: ProxyConfig;
     middlewares: typeof this.middlewares;
     services: typeof this.services;
+    server: typeof this;
   };
 
   constructor(config: ProxyConfig) {
@@ -49,19 +50,20 @@ class Proxy {
     this.context = {
       config: this.config,
       middlewares: this.middlewares,
-      services: this.services
+      services: this.services,
+      server: this
     };
 
   }
 
   RegisterClientHandler<T>(
-    packetClass: { opcode: number },
-    handler: (packet: T, ctx?: any) => any
+    PacketClass: { opcode: number },
+    action: (packet: T, ctx?: any) => any
   ) {
-    const opcode = packetClass.opcode;
+    const opcode = PacketClass.opcode;
     const side = "client";
 
-    this.middlewares[side][opcode] = { packetClass, handler };
+    this.middlewares[side][opcode] = { PacketClass, action };
     this.SetContext();
     if (this.config.debug) {
       console.log(
@@ -70,13 +72,13 @@ class Proxy {
     }
   }
   RegisterModuleHandler<T>(
-    packetClass: { opcode: number },
-    handler: (packet: T, ctx?: any) => any
+    PacketClass: { opcode: number },
+    action: (packet: T, ctx?: any) => any
   ) {
-    const opcode = packetClass.opcode;
+    const opcode = PacketClass.opcode;
     const side = "remote";
 
-    this.middlewares[side][opcode] = { packetClass, handler };
+    this.middlewares[side][opcode] = { PacketClass, action };
     this.SetContext();
     if (this.config.debug) {
       console.log(

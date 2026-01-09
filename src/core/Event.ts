@@ -5,20 +5,19 @@ function CreateEventHandler(ctx: ProxyContext) {
   return async function Event(event: ProxyEvent): Promise<void> {
     const target = event.sender === "client" ? "remote" : "client";
     const receive = (await event.session.instance[event.sender].security.GetPacketToRecv()) || [];
-
     for (const packet of receive) {
       if (
         (target === "remote" && ctx.config.whitelist?.[packet.opcode]) ||
         target === "client"
       ) {
-        const middleware = ctx.middlewares[event.sender]?.[packet.opcode] ?? false;
+        const handler = ctx.middlewares[event.sender]?.[packet.opcode] ?? false;
         const _packet = packet;
-        if (middleware) {
-          const packetClass = new middleware.packetClass();
-          packetClass.bindPacket(packet);
+        if (handler) {
+          const packetClass = new handler.PacketClass();
+          packetClass.BindPacket(packet);
           packetClass.Read();
-          const _handler = await middleware.handler(packetClass, event.session);
-          const built = _handler.Build();
+          const NewPacket = await handler.action(packetClass, event.session);
+          const built = NewPacket.Build();
           const data = built.writer.toData();
           if (data.length) {
             _packet.data = data;
@@ -36,6 +35,10 @@ function CreateEventHandler(ctx: ProxyContext) {
               break;
             case PacketResultType.Block:
               console.log("Blocked!")
+              break;
+            case PacketResultType.Disconnect:
+              console.log("Disconnected!", event.session.client.id)
+              ctx.server.removeInstance(event.session.client.id);
               break;
           }
         } else if (_packet) {

@@ -21,7 +21,7 @@ export abstract class Packet {
     this.Reset();
   }
 
-  bindPacket(packet: RawPacket) {
+  BindPacket(packet: RawPacket) {
     this._packet = packet;
     this.reader = new stream.reader(packet.data);
   }

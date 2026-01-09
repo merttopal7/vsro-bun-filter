@@ -19,20 +19,17 @@ export class EntityParsingHandler {
     }
 
     async ON_SERVER_CHARACTER_DATA_BEGIN(data: SERVER_CHARACTER_DATA_BEGIN, session: Session) {
-        console.log("ON_SERVER_CHARACTER_DATA_BEGIN")
         const charInfo: CharInfo = session.GetData(Data.CharInfo, new CharInfo());
         charInfo.Initalize();
         
         return data;
     }
     async ON_SERVER_CHARACTER_DATA(data: SERVER_CHARACTER_DATA, session: Session) {
-        console.log("ON_SERVER_CHARACTER_DATA")
         const charInfo: CharInfo = session.GetData(Data.CharInfo, new CharInfo());
         charInfo.Append(data);
         return data;
     }
     async ON_SERVER_CHARACTER_DATA_END(data: SERVER_CHARACTER_DATA_END, session: Session) {
-        console.log("ON_SERVER_CHARACTER_DATA_END")
         const charInfo: CharInfo = session.GetData(Data.CharInfo, new CharInfo());
         charInfo.Read();
         return data;

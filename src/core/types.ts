@@ -2,6 +2,7 @@ import type { Socket } from "net";
 import type { Packet } from "@/core/Packet";
 import type { Knex } from "knex";
 import { Session } from "@/core/Session/Session";
+import Proxy from "./Proxy";
 
 export type ReadHolder =
   | { t: "byte"; value: number }
@@ -126,9 +127,10 @@ export interface MiddlewareContext {
 }
 
 export interface MiddlewareFn<T extends Packet = Packet> {
-  packetClass: PacketConstructor<T>;
-  handler: (packet: T, session: Session) => void | Packet | Promise<void | Packet>;
+  PacketClass: PacketConstructor<T>;
+  action: (packet: T, session: Session) => Packet | Promise<Packet>;
 }
+
 export interface SessionContext {
   client: {
     id: string;
@@ -162,6 +164,7 @@ export interface ProxyContext {
     remote: Record<number, MiddlewareFn>;
   };
   services: Record<string, any>;
+  server: Proxy
 }
 
 export type DatabaseAdapters = Partial<Record<string, Knex>>;

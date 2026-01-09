@@ -11,6 +11,9 @@ export class Session {
         this.instance = ctx.instance;
         this.SessionData = new Cache();
     }
+    GetId() {
+        return this.SessionData.id;
+    }
     async SendToClient(packet: Packet, encrypted: boolean = false, massive: boolean = false) {
         await this.instance.client.security.Send(packet.opcode, packet.writer, encrypted, massive);
 
