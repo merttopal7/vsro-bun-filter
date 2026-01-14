@@ -1,4 +1,5 @@
 import type { Knex } from "knex";
+import path from "path";
 
 const baseConnection: Knex.MsSqlConnectionConfig = {
   user: "sa",
@@ -35,7 +36,7 @@ export const configWithMigration = {
     },
     migrations: {
       tableName: "ftemir_migrations",
-      directory: "./migrations"
+      directory: path.join(process.cwd(), "src/utils/Database/migrations"),
     }
   }
 };

@@ -1,5 +1,5 @@
 class stream {
-    constructor() {}
+    constructor() { }
 }
 class writer extends stream {
 
@@ -14,7 +14,7 @@ class writer extends stream {
 
         this.buffer.writeUInt8(b, this.pointer);
 
-        if(this.pointer == this.size) {
+        if (this.pointer == this.size) {
             this.pointer += 1;
             this.size += 1;
         } else {
@@ -27,7 +27,7 @@ class writer extends stream {
 
         this.buffer.writeUInt16LE(b, this.pointer);
 
-        if(this.pointer == this.size) {
+        if (this.pointer == this.size) {
             this.pointer += 2;
             this.size += 2;
         } else {
@@ -40,7 +40,7 @@ class writer extends stream {
 
         this.buffer.writeUInt32LE(b, this.pointer);
 
-        if(this.pointer == this.size) {
+        if (this.pointer == this.size) {
             this.pointer += 4;
             this.size += 4;
         } else {
@@ -53,7 +53,7 @@ class writer extends stream {
 
         this.buffer.writeFloatLE(b, this.pointer);
 
-        if(this.pointer == this.size) {
+        if (this.pointer == this.size) {
             this.pointer += 4;
             this.size += 4;
         } else {
@@ -65,11 +65,11 @@ class writer extends stream {
     string(str) {
 
         var vstr = new String(str);
-        var len = vstr.length; 
+        var len = vstr.length;
         this.uint16(len);
         this.buffer.write(str, this.pointer);
-        
-        if(this.pointer == this.size) {
+
+        if (this.pointer == this.size) {
             this.pointer += len;
             this.size += len;
         } else {
@@ -78,10 +78,22 @@ class writer extends stream {
 
     }
 
+    stringAscii(str) {
+        const len = Buffer.byteLength(str, "ascii");
+
+        this.uint16(len);
+        this.buffer.write(str, this.pointer, len, "ascii");
+
+        this.pointer += len;
+        if (this.pointer > this.size) {
+            this.size = this.pointer;
+        }
+    }
+
     toData() {
         return this.buffer.slice(0, this.size).toJSON().data
     }
-   
+
 }
 
 class reader extends stream {
@@ -93,58 +105,64 @@ class reader extends stream {
     }
 
     uint8() {
-		var value = this.buffer.readUInt8(this.pointer);
-		this.pointer++;
-		return value;
+        var value = this.buffer.readUInt8(this.pointer);
+        this.pointer++;
+        return value;
     }
-    
-	uint16() {
 
-		var value = this.buffer.readUInt16LE(this.pointer);
-		this.pointer += 2;
-		return value;
+    uint16() {
+
+        var value = this.buffer.readUInt16LE(this.pointer);
+        this.pointer += 2;
+        return value;
     }
-     
-	uint32() {
-		var value = this.buffer.readUInt32LE(this.pointer);
-		this.pointer += 4;
-		return value;
+
+    uint32() {
+        var value = this.buffer.readUInt32LE(this.pointer);
+        this.pointer += 4;
+        return value;
     }
 
     uint64() {
         // var value = this.buffer.readUIntLE(this.pointer, 8)
         var value = this.buffer.readBigUInt64LE(this.pointer);
-		this.pointer += 8;
-		return value;
+        this.pointer += 8;
+        return value;
     }
-    
-	string() {
+
+    string() {
         var len = this.uint16();
         var str = this.buffer.toString("utf8", this.pointer, this.pointer + len);
         this.pointer += len;
         return str;
     }
-    
-	float() {
-	    var value = this.buffer.readFloatLE(this.pointer);
-	    this.pointer += 4;
-	    return value;
+    stringAscii() {
+        const len = this.uint16();
+        const str = this.buffer.toString("ascii", this.pointer, this.pointer + len);
+        this.pointer += len;
+        return str;
     }
-    
-	bool()
-	{
-	    if (this.buffer.readUInt8(this.pointer) == 1) {
-	        return true;
-	    } else {
-	        return false;
+
+
+    float() {
+        var value = this.buffer.readFloatLE(this.pointer);
+        this.pointer += 4;
+        return value;
+    }
+
+    bool() {
+        if (this.buffer.readUInt8(this.pointer) == 1) {
+            return true;
+        } else {
+            return false;
         }
-        
+
     }
 
     toData() {
         return this.buffer.toJSON().data
     }
-    
+
 }
 
 module.exports = {

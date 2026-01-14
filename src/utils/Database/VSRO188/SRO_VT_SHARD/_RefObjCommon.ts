@@ -1,4 +1,7 @@
-export class _RefObjCommon {
+import { BaseModel } from "../../BaseModel";
+
+export class _RefObjCommon extends BaseModel {
+  static TableName = "_RefObjCommon"
   Service!: number;
   ID!: number;
 

@@ -1,4 +1,7 @@
-export class _RefObjChar {
+import { BaseModel } from "../../BaseModel/index";
+
+export class _RefObjChar extends BaseModel{
+  static TableName = "_RefObjChar"
   ID!: number;
 
   Lvl!: number;

@@ -69,10 +69,10 @@ export const StaticTypes = {
   stringASCII(v = ""): StaticType<string> {
     return {
       value: v,
-      read(r) { this.value = r.string('ascii'); },
+      read(r) { this.value = r.stringAscii(); },
       set(v) { this.value = v; },
       get() { return this.value; },
-      write(w) { w.string(this.value); },
+      write(w) { w.stringAscii(this.value); },
       valueOf() { return this.value; }
     };
   }
