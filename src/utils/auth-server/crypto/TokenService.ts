@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-export class TokenService {
+class TokenService {
   private readonly secret: Buffer;
   private readonly ttlSeconds: number;
 
@@ -9,43 +9,42 @@ export class TokenService {
     this.ttlSeconds = ttlSeconds;
   }
 
-  private hashIp(ip: string): number {
-    let hash = 0;
-    for (let i = 0; i < ip.length; i++) {
-      hash = ((hash << 5) - hash) + ip.charCodeAt(i);
-      hash |= 0;
-    }
-    return hash >>> 0;
-  }
-
-  generate(userId: number, ip: string): string {
+  generate(userId: number): string {
     const buffer = Buffer.alloc(64);
     let offset = 0;
 
+    // userId
     buffer.writeUInt32BE(userId, offset);
     offset += 4;
 
+    // exp (unix seconds)
     const exp = Math.floor(Date.now() / 1000) + this.ttlSeconds;
     buffer.writeBigInt64BE(BigInt(exp), offset);
     offset += 8;
 
-    buffer.writeUInt32BE(this.hashIp(ip), offset);
-    offset += 4;
+    // random nonce
+    crypto.randomFillSync(buffer.subarray(offset, offset + 20));
+    offset += 20;
 
-    crypto.randomFillSync(buffer.subarray(offset, offset + 16));
-    offset += 16;
-
+    // HMAC(payload)
     const hmac = crypto
       .createHmac("sha256", this.secret)
       .update(buffer.subarray(0, offset))
       .digest();
 
     hmac.copy(buffer, offset);
-
-    return buffer.toString("base64");
+    const generated = buffer.toString("base64")
+      .replace(/\+/g, "-") // '+' yerine '-'
+      .replace(/\//g, "_") // '/' yerine '_'
+      .replace(/=+$/, "");
+    console.log("generated", generated);
+    return generated;
   }
 
-  validate(tokenBase64: string, ip: string): boolean {
+  validate(tokenBase64: string): boolean {
+    tokenBase64 = tokenBase64
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
     let token: Buffer;
 
     try {
@@ -74,14 +73,12 @@ export class TokenService {
     if (exp < now)
       return false;
 
-    const ipHash = payload.readUInt32BE(12);
-    if (ipHash !== this.hashIp(ip))
-      return false;
-
     return true;
   }
+
   getExpireTimestamp(): number {
     return Date.now() + this.ttlSeconds * 1000;
   }
-
 }
+
+export const tokenService = new TokenService("SUPER_SECRET_KEY_CHANGE_THIS", 30);

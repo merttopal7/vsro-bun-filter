@@ -51,7 +51,7 @@ function CreateEventHandler(ctx: ProxyContext) {
         }
       } else if (ctx.config.debug && target === "remote") {
         console.log(
-          `[${event.sender}]->(${packet.opcode})->${target}: NOT WHITELISTED`
+          `[${event.sender}]->(0x${packet.opcode.toString(16)})->${target}: NOT WHITELISTED`
         );
       }
     }

@@ -1,10 +1,10 @@
-import Proxy from '@/core/Proxy';
 import configuration from '@/modules/AgentServer/config';
 import { ExploitHandler } from "@/modules/AgentServer/handlers/ExploitHandler";
 import { DataHandler } from "@/modules/AgentServer/handlers/DataHandler";
 import { EntityParsingHandler } from "@/modules/AgentServer/handlers/EntityParsingHandler";
+import AuthProxy from '@/core/AuthProxy';
 
-class AgentServer extends Proxy {
+class AgentServer extends AuthProxy {
     constructor() {
         configuration.debug = true;
         configuration.module = "AgentServer";

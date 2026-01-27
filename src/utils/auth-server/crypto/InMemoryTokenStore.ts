@@ -3,19 +3,20 @@ import crypto from "crypto";
 type TokenEntry = {
   expiresAt: number;
 };
-
-export class InMemoryTokenStore {
+class InMemoryTokenStore {
   private readonly tokens = new Map<string, TokenEntry>();
 
   constructor() {
     // cleanup loop
-    setInterval(() => this.cleanup(), 5_000).unref();
+    setInterval(() => this.cleanup(), 30_000).unref();
   }
-
+  private normalize(token: string): string {
+    return token.trim();
+  }
   private fingerprint(token: string): string {
     return crypto
       .createHash("sha256")
-      .update(token)
+      .update(this.normalize(token), "utf8")
       .digest("hex");
   }
 
@@ -27,17 +28,22 @@ export class InMemoryTokenStore {
 
   consume(token: string): boolean {
     const key = this.fingerprint(token);
-    const entry = this.tokens.get(key);
 
-    if (!entry)
-      return false;
+    console.log("CONSUME CALLED", {
+      token,
+      key,
+      has: this.tokens.has(key),
+      size: this.tokens.size
+    });
+
+    const entry = this.tokens.get(key);
+    if (!entry) return false;
 
     if (entry.expiresAt < Date.now()) {
       this.tokens.delete(key);
       return false;
     }
 
-    // 🔥 TEK KULLANIM
     this.tokens.delete(key);
     return true;
   }
@@ -51,3 +57,5 @@ export class InMemoryTokenStore {
     }
   }
 }
+
+export const tokenStore = new InMemoryTokenStore();
