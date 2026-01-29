@@ -26,8 +26,8 @@ export class DataHandler {
 
     async ON_SERVER_GATEWAY_PATCH_RESPONSE(data: SERVER_GATEWAY_PATCH_RESPONSE, session: Session) {
         if (data.HasUpdate.get()) {
-            data.DownloadServer.Host.set("54.37.80.146");
-            data.DownloadServer.Port.set(9002);
+            data.DownloadServer.Host.set("127.0.0.1");
+            data.DownloadServer.Port.set(9009);
         }
 
         return data;

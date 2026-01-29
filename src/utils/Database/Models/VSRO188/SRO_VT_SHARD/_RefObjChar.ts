@@ -1,4 +1,4 @@
-import { BaseModel } from "../../BaseModel/index";
+import { BaseModel } from "../../../BaseModel/index";
 
 export class _RefObjChar extends BaseModel{
   static TableName = "_RefObjChar"

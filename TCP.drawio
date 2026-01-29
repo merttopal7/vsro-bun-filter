@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
+  <diagram name="Sayfa -1" id="hda3CmOXpb_kyzP6HvZ6">
+    <mxGraphModel dx="1426" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TWqHZBigFahzJZsnIJjk-12" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="700" width="700" x="64" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-7" edge="1" parent="1" source="TWqHZBigFahzJZsnIJjk-2" style="endArrow=classic;html=1;rounded=0;exitX=0.083;exitY=0.1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="130" y="240" />
+              <mxPoint x="390" y="240" />
+              <mxPoint x="643" y="240" />
+            </Array>
+            <mxPoint x="130" y="460" as="sourcePoint" />
+            <mxPoint x="642.5" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;HTTP SERVER&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Cloudflare Arkasında Çalışacak" vertex="1">
+          <mxGeometry height="100" width="220" x="490" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-4" edge="1" parent="1" source="TWqHZBigFahzJZsnIJjk-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="TWqHZBigFahzJZsnIJjk-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="320" />
+              <mxPoint x="585" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-10" edge="1" parent="1" source="TWqHZBigFahzJZsnIJjk-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="TWqHZBigFahzJZsnIJjk-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;CLIENT&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="120" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;TCP SERVER&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="220" x="490" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;/auth&amp;nbsp;&lt;/font&gt;&lt;/b&gt;&lt;div&gt;login olacak jwt token üretecek&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="200" x="180" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;/tcp-token&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&amp;nbsp;JWT TOKEN ile tek kullanımlık ve 5 saniye geçerli token üretecek.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="260" x="130" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-11" edge="1" parent="1" source="TWqHZBigFahzJZsnIJjk-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="TWqHZBigFahzJZsnIJjk-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TWqHZBigFahzJZsnIJjk-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;TCP PROXY SERVER&lt;/b&gt;&lt;/font&gt;&lt;br&gt;TCP TOKEN Doğrulayacak.&lt;br&gt;Eğer başarılıysa Orijinal servere proxy açacak." vertex="1">
+          <mxGeometry height="80" width="220" x="490" y="470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

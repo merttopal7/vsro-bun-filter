@@ -1,7 +1,7 @@
 import { Cache } from "@/utils/Cache";
 import { Database } from "@/utils/Database";
-import { _RefObjChar } from "@/utils/Database/VSRO188/SRO_VT_SHARD/_RefObjChar";
-import { _RefObjCommon } from "@/utils/Database/VSRO188/SRO_VT_SHARD/_RefObjCommon";
+import { _RefObjChar } from "@/utils/Database/Models/VSRO188/SRO_VT_SHARD/_RefObjChar";
+import { _RefObjCommon } from "@/utils/Database/Models/VSRO188/SRO_VT_SHARD/_RefObjCommon";
 
 export class FTemirCache extends Cache {
     Cached: boolean = false;

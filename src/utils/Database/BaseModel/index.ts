@@ -1,4 +1,4 @@
-import { Database } from "..";
+import { Database } from "@/utils/Database/index";
 
 type HasTableName = {
     TableName: string;
@@ -15,8 +15,17 @@ export class BaseModel {
     static async fromQuery<T>(
         this: Constructor<T>,
         knexQuery: Promise<any>
-    ): Promise<T> {
+    ): Promise<T | T[] | null> {
         const data = await knexQuery;
+
+        if (!data) return null;
+
+        if (Array.isArray(data)) {
+            return data.map(row =>
+                Object.assign(new this(), row)
+            );
+        }
+
         return Object.assign(new this(), data);
     }
 }

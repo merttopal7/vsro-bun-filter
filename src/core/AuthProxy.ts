@@ -12,7 +12,7 @@ abstract class AuthProxy extends Proxy {
     constructor(config: ProxyConfig) {
         super(config);
     }
-    
+
     setupSocketHandlers(
         instance: Instance,
         id: string,
@@ -82,16 +82,17 @@ abstract class AuthProxy extends Proxy {
     private handleAuthPacket(data: Buffer): boolean {
         try {
             if (data.length < 2) return false;
-
+            
             const tokenLen = data.readUInt16BE(0);
             if (data.length < 2 + tokenLen) return false;
-
+            
             const tokenBuf = data.subarray(2, 2 + tokenLen);
             const token = tokenBuf.toString("utf8");
-
+            
             if (!this.tokenService.validate(token)) return false;
             if (!this.tokenStore.consume(token)) return false;
-
+            
+            console.log(`[${this.config.module}] Auth Packet Validated.`)
             return true;
         } catch (err) {
             console.log("[AuthProxy] AUTH PACKET ERROR:", err);

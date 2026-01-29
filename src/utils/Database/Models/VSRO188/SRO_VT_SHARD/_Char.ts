@@ -1,8 +1,8 @@
 import { FTemir } from "@/FTemir/index.js";
-import { _RefObjChar } from "./_RefObjChar.ts";
-import { _RefObjCommon } from "./_RefObjCommon";
-import { Database } from "../../index.ts";
-import { BaseModel } from "../../BaseModel/index";
+import { _RefObjChar } from "./_RefObjChar.js";
+import { _RefObjCommon } from "./_RefObjCommon.js";
+import { Database } from "../../../index.js";
+import { BaseModel } from "../../../BaseModel/index";
 
 export class _Char extends BaseModel {
   static TableName = "_Char"

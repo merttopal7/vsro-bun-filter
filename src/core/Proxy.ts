@@ -8,6 +8,7 @@ import type {
   MiddlewareFn,
   Stream
 } from "@/core/types";
+import { Service } from "@/utils/Database/Models/FTemir/Service";
 
 class Proxy {
   services: Record<string, any>;
@@ -30,7 +31,7 @@ class Proxy {
 
   constructor(config: ProxyConfig) {
     this.services = {};
-    this.config = { ...config };
+    this.config = { LOCAL: { HOST: null, PORT: null }, REMOTE: { HOST: null, PORT: null }, ...config };
     this.instances = new Map();
     this.middlewares = { client: {}, remote: {} };
     this.stream = stream;
@@ -44,6 +45,18 @@ class Proxy {
         `[${this.config.module}]->{Production}->(run)`
       );
     }
+  }
+
+  SetServiceSettings(service: Service) {
+    this.config.module = service.Name;
+    this.config.LOCAL = {
+      HOST: service.LocalIP,
+      PORT: service.BindPort
+    };
+    this.config.REMOTE = {
+      HOST: service.RemoteIP,
+      PORT: service.RemotePort
+    };
   }
 
   SetContext() {
@@ -141,7 +154,34 @@ class Proxy {
     });
   }
 
+  canStart(): boolean {
+    if (
+      this.config.module == null ||
+      this.config.LOCAL == null ||
+      this.config.LOCAL.HOST == null ||
+      this.config.LOCAL.PORT == null ||
+      this.config.REMOTE == null ||
+      this.config.REMOTE.HOST == null ||
+      this.config.REMOTE.PORT == null
+    ) return false;
+
+    if (
+      typeof this.config.LOCAL.HOST !== "string" ||
+      typeof this.config.LOCAL.PORT !== "number" ||
+      this.config.LOCAL.PORT <= 0 ||
+      this.config.LOCAL.PORT > 65535 ||
+      typeof this.config.REMOTE.HOST !== "string" ||
+      typeof this.config.REMOTE.PORT !== "number" ||
+      this.config.REMOTE.PORT <= 0 ||
+      this.config.REMOTE.PORT > 65535
+    ) return false;
+
+    return true;
+  }
+
   start(): void {
+    if (!this.canStart())
+      return console.error(`You cant start [${this.config.module}] module. Check config.LOCAL AND config.REMOTE! example: PORT (0-65535), HOST (0.0.0.0 (any IP Address))`);
     this.server = createServer(
       { pauseOnConnect: false, noDelay: true },
       (clientSocket: Socket) => {

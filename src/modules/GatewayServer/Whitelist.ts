@@ -1,12 +1,4 @@
 export default {
-  LOCAL: {
-    HOST: '127.0.0.1',
-    PORT: 9007
-  },
-  REMOTE: {
-    HOST: '54.37.80.146',
-    PORT: 9001
-  },
   whitelist: {
     0x2002: 'GLOBAL_PING',
     0x9000: 'GLOBAL_HANDSHAKE_ACCEPT',

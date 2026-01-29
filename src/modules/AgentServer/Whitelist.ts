@@ -1,12 +1,4 @@
 export default {
-  LOCAL: {
-    HOST: '127.0.0.1',
-    PORT: 9008
-  },
-  REMOTE: {
-    HOST: '54.37.80.146',
-    PORT: 9003
-  },
   whitelist: {
     0x7474: 'ACADEMY_LEAVE',
     0x7150: 'ALCHEMY_REINFORCE',

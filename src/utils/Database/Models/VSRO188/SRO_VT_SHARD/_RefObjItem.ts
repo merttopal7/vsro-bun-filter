@@ -1,6 +1,6 @@
 import { FTemir } from "@/FTemir";
 import { _RefObjCommon } from "./_RefObjCommon";
-import { BaseModel } from "../../BaseModel";
+import { BaseModel } from "../../../BaseModel";
 
 export class RefObjItem extends BaseModel {
   static TableName = "RefObjItem"

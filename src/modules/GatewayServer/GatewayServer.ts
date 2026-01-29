@@ -1,11 +1,11 @@
 import AuthProxy from '@/core/AuthProxy';
 import Proxy from '@/core/Proxy';
-import configuration from '@/modules/GatewayServer/config';
+import configuration from '@/modules/GatewayServer/Whitelist';
 import { DataHandler } from "@/modules/GatewayServer/handlers/DataHandler";
 
 class GatewayServer extends AuthProxy {
     constructor() {
-        configuration.debug = true;
+        configuration.debug = false;
         configuration.module = "GatewayServer";
         super(configuration);
 

@@ -66,18 +66,34 @@ export class Database {
     }
 
     static async GenerateAdapters() {
-        const values = Object.values(DatabaseNames);
-        for (let i = 0; i < values.length; i++) {
-            const value: string = values[i];
-            const IsFTEMIR = value == DatabaseNames.FTEMIR;
-            const cfg = IsFTEMIR ? configWithMigration : config;
-            cfg.development.connection = Database.GenerateBaseConfig(DatabaseNames[value]);
-            cfg.development.pool = Database.GeneratePoolConfig();
-            Database.Adapters[value] = knex(cfg.development);
-            if (IsFTEMIR)
-                await Database.Adapters[value].migrate.latest();
+        const dbNames = [
+            DatabaseNames.SRO_VT_ACCOUNT,
+            DatabaseNames.SRO_VT_LOG,
+            DatabaseNames.SRO_VT_SHARD,
+            DatabaseNames.FTEMIR,
+        ];
+
+        for (const dbName of dbNames) {
+            const isFTEMIR = dbName === DatabaseNames.FTEMIR;
+
+            const cfg = isFTEMIR
+                ? structuredClone(configWithMigration)
+                : structuredClone(config);
+
+            cfg.development.connection =
+                Database.GenerateBaseConfig(dbName);
+
+            cfg.development.pool =
+                Database.GeneratePoolConfig();
+
+            Database.Adapters[dbName] = knex(cfg.development);
+
+            if (isFTEMIR) {
+                await Database.Adapters[dbName].migrate.latest();
+            }
         }
     }
+
     static SRO_VT_ACCOUNT(): Knex {
         return Database.Adapters[DatabaseNames.SRO_VT_ACCOUNT];
     }

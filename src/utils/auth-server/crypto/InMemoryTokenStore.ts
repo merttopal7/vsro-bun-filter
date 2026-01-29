@@ -29,13 +29,6 @@ class InMemoryTokenStore {
   consume(token: string): boolean {
     const key = this.fingerprint(token);
 
-    console.log("CONSUME CALLED", {
-      token,
-      key,
-      has: this.tokens.has(key),
-      size: this.tokens.size
-    });
-
     const entry = this.tokens.get(key);
     if (!entry) return false;
 

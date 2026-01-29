@@ -2,6 +2,8 @@ import { Database } from "@/utils/Database";
 import { Settings, SETTINGS_FILE, defaultSettings } from "./SettingsFile";
 import { FTemir } from "@/FTemir";
 import { FTemirCache } from "@/FTemir/Cache";
+import { ServiceManager } from "@/FTemir/ServiceManager/ServiceManager";
+import { AuthServer } from "@/utils/auth-server/AuthServer";
 
 export class FTemir {
     static _Settings: Settings;
@@ -11,6 +13,20 @@ export class FTemir {
         await FTemir.LoadSettings();
         await Database.Initalize();
         FTemir.Cache.FetchTablesForCache();
+    }
+
+    static GetServiceManager() {
+        return ServiceManager;
+    }
+
+    static async StartServiceManager(machineId?: number) {
+        await ServiceManager.start(machineId);
+    }
+
+    static async StartAuthServer(port?: number) {
+        if (port == null) port = 3000;
+        const authServer: AuthServer = new AuthServer();
+        authServer.start(port);
     }
 
     static GetSettings() {
