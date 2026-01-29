@@ -3,7 +3,7 @@ import { FTemir } from '@/FTemir';
 const main = async () => {
   await FTemir.Initalize();
   await FTemir.StartAuthServer();
-  await FTemir.StartServiceManager(1);
+  await FTemir.StartServiceManager(1); // Starts services where MachineId 1. 
 
 
   // Start Service Manually
